@@ -1,11 +1,11 @@
 # GitHub Blog (demo)
 
 ## In progress
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/5)  
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/25)  
 
-<!-- ## Demo -->
+## Demo
 
-<!-- [GitHub Blog (demo)](link) -->
+[GitHub Blog (demo)](https://github-blog-viniciusmb17.vercel.app/)
 
 
 ## Authors
