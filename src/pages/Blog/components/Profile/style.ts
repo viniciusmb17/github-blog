@@ -10,8 +10,8 @@ export const ProfileContainer = styled.section`
   box-shadow: 0 2px 28px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin-top: -5.5rem;
-  padding: 40px 32px;
-  gap: 32px;
+  padding: 2.5rem 2rem;
+  gap: 2rem;
 `
 export const ProfileAvatar = styled.img`
   width: 9.25rem;
@@ -38,13 +38,13 @@ export const ProfileContent = styled.div`
 `
 
 export const ProfileText = styled.p`
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 `
 
 export const ProfileInfo = styled.ul`
   display: flex;
   list-style-type: none;
-  column-gap: 24px;
+  column-gap: 1.5rem;
 `
 
 export const InfoItem = styled.li`
