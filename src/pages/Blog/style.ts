@@ -4,11 +4,12 @@ export const BlogContainer = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   width: 90rem;
   align-items: center;
   background-color: ${(props) => props.theme['base-background']};
   row-gap: 72px;
+  padding-bottom: 14.625rem;
 `
 export const BlogSection = styled.section`
   display: flex;
@@ -59,5 +60,6 @@ export const BlogSearchInput = styled.input`
 export const BlogPosts = styled.main`
   margin-top: 3.75rem;
   display: grid;
-  width: ;
+  grid-template-columns: auto auto;
+  gap: 2rem;
 `

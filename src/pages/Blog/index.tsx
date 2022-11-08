@@ -1,4 +1,5 @@
 import { Profile } from './components/Profile'
+import { Post } from './components/Post'
 import {
   BlogContainer,
   BlogSection,
@@ -18,7 +19,14 @@ export function Blog() {
           <span>6 publicações</span>
         </BlogHeader>
         <BlogSearchInput type="text" placeholder="Buscar conteúdo" />
-        <BlogPosts>Posts...</BlogPosts>
+        <BlogPosts>
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+        </BlogPosts>
       </BlogSection>
     </BlogContainer>
   )
