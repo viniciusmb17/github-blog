@@ -41,7 +41,7 @@ export const ProfileText = styled.p`
   margin-bottom: 1.5rem;
 `
 
-export const ProfileInfo = styled.ul`
+export const ProfileInfoList = styled.ul`
   display: flex;
   list-style-type: none;
   column-gap: 1.5rem;

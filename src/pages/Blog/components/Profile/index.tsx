@@ -4,7 +4,7 @@ import {
   ProfileContainer,
   ProfileContent,
   ProfileHeader,
-  ProfileInfo,
+  ProfileInfoList,
   ProfileText,
   ProfileTitle,
 } from './style'
@@ -30,7 +30,7 @@ export function Profile() {
           reiciendis nam voluptas odio harum eius repellat ipsam esse quia
           dignissimos officiis illum suscipit!
         </ProfileText>
-        <ProfileInfo>
+        <ProfileInfoList>
           <InfoItem>
             <FontAwesomeIcon icon={faGithub} />
             <span>viniciusmb17</span>
@@ -43,7 +43,7 @@ export function Profile() {
             <FontAwesomeIcon icon={faUserGroup} />
             <span>5 seguidores</span>
           </InfoItem>
-        </ProfileInfo>
+        </ProfileInfoList>
       </ProfileContent>
     </ProfileContainer>
   )
