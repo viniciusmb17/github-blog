@@ -1,19 +1,19 @@
 import {
-  PostContainer,
-  PostHeader,
-  PostTitle,
-  PostSpan,
-  PostText,
+  PostCardContainer,
+  PostCardHeader,
+  PostCardTitle,
+  PostCardSpan,
+  PostCardText,
 } from './style'
 
-export function Post() {
+export function PostCard() {
   return (
-    <PostContainer>
-      <PostHeader>
-        <PostTitle>JavaScript data types and data structures</PostTitle>
-        <PostSpan>Há 1 dia</PostSpan>
-      </PostHeader>
-      <PostText>
+    <PostCardContainer>
+      <PostCardHeader>
+        <PostCardTitle>JavaScript data types and data structures</PostCardTitle>
+        <PostCardSpan>Há 1 dia</PostCardSpan>
+      </PostCardHeader>
+      <PostCardText>
         {`Programming languages all have built-in data structures, but these often
         differ from one language to another. This article attempts to list the
         built-in data structures available in JavaScript and what properties
@@ -24,7 +24,7 @@ export function Post() {
         and any variable can be assigned (and re-assigned) values of all types:
         let foo = 42; // foo is now a number foo = 'bar'; // foo is now a string
         foo = true; // foo is now a boolean`}
-      </PostText>
-    </PostContainer>
+      </PostCardText>
+    </PostCardContainer>
   )
 }

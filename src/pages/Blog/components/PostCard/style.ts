@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const PostContainer = styled.div`
+export const PostCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 26rem;
@@ -12,12 +12,12 @@ export const PostContainer = styled.div`
   border-radius: 10px;
 `
 
-export const PostHeader = styled.header`
+export const PostCardHeader = styled.header`
   display: flex;
   align-items: baseline;
 `
 
-export const PostTitle = styled.h1`
+export const PostCardTitle = styled.h1`
   display: flex;
   height: 4rem;
   width: 17.6875rem;
@@ -27,7 +27,7 @@ export const PostTitle = styled.h1`
   color: ${(props) => props.theme['base-title']};
 `
 
-export const PostSpan = styled.span`
+export const PostCardSpan = styled.span`
   display: flex;
   width: 3.3125rem;
   white-space: nowrap;
@@ -38,7 +38,7 @@ export const PostSpan = styled.span`
   color: ${(props) => props.theme['base-span']};
 `
 
-export const PostText = styled.p`
+export const PostCardText = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;

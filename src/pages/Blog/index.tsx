@@ -1,5 +1,5 @@
 import { Profile } from './components/Profile'
-import { Post } from './components/Post'
+import { PostCard } from './components/PostCard'
 import {
   BlogContainer,
   BlogSection,
@@ -20,12 +20,12 @@ export function Blog() {
         </BlogHeader>
         <BlogSearchInput type="text" placeholder="Buscar conteúdo" />
         <BlogPosts>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
         </BlogPosts>
       </BlogSection>
     </BlogContainer>
