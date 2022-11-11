@@ -12,7 +12,7 @@ interface CustomLinkProps extends LinkProps {
 
 export function CustomLink({ to, children, iconAt }: CustomLinkProps) {
   return (
-    <CustomLinkContainer to={to} iconAt={iconAt}>
+    <CustomLinkContainer to={to}>
       {iconAt === 'start' && <FontAwesomeIcon icon={faChevronLeft} />}
       {children}
       {iconAt === 'end' && <FontAwesomeIcon icon={faArrowUpRightFromSquare} />}
