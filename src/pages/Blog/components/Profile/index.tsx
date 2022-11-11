@@ -21,7 +21,7 @@ export function Profile() {
         <ProfileHeader>
           <ProfileTitle>Vinicius Barbosa</ProfileTitle>
           <CustomLink to="/" iconAt="end">
-            github
+            GitHub
           </CustomLink>
         </ProfileHeader>
         <ProfileText>
