@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import {
   PostCardContainer,
   PostCardHeader,
@@ -7,8 +8,10 @@ import {
 } from './style'
 
 export function PostCard() {
+  const navigate = useNavigate()
+
   return (
-    <PostCardContainer>
+    <PostCardContainer onClick={() => navigate('/post')}>
       <PostCardHeader>
         <PostCardTitle>JavaScript data types and data structures</PostCardTitle>
         <PostCardSpan>Há 1 dia</PostCardSpan>
