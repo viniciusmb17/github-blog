@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserGroup, faBuilding } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { CustomLink } from '../../../../components/CustomLink'
+import { CustomAnchor } from '../../../../components/CustomAnchor'
 
 export function Profile() {
   return (
@@ -20,9 +20,9 @@ export function Profile() {
       <ProfileContent>
         <ProfileHeader>
           <ProfileTitle>Vinicius Barbosa</ProfileTitle>
-          <CustomLink to="/" iconAt="end">
+          <CustomAnchor href="https://github.com/viniciusmb17">
             GitHub
-          </CustomLink>
+          </CustomAnchor>
         </ProfileHeader>
         <ProfileText>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus,

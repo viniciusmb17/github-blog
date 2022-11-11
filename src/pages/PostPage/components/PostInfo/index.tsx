@@ -1,6 +1,7 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faCalendarDay, faComment } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { CustomAnchor } from '../../../../components/CustomAnchor'
 import { CustomLink } from '../../../../components/CustomLink'
 import {
   PostInfoContainer,
@@ -14,12 +15,12 @@ export function PostInfo() {
   return (
     <PostInfoContainer>
       <PostInfoHeader>
-        <CustomLink to=".." relative="path" iconAt="start">
+        <CustomLink to=".." relative="path">
           Voltar
         </CustomLink>
-        <CustomLink to="#" iconAt="end">
+        <CustomAnchor href="https://github.com/viniciusmb17">
           Ver no GitHub
-        </CustomLink>
+        </CustomAnchor>
       </PostInfoHeader>
       <PostInfoTitle>JavaScript data types and data structures</PostInfoTitle>
       <PostInfoList>
