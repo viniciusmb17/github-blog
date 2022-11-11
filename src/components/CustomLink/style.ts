@@ -1,12 +1,13 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-export const LinkContainer = styled.a`
+export const CustomLinkContainer = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 1.1875rem;
   padding: 0;
-  margin-bottom: 1px;
+  border-bottom: 1px solid transparent;
   gap: 0.5rem;
 
   text-transform: uppercase;
@@ -16,6 +17,7 @@ export const LinkContainer = styled.a`
   font-size: 0.75rem;
   line-height: 160%;
   color: ${(props) => props.theme.blue};
+  transition: border-color 0.7s;
 
   svg {
     width: 0.75rem;
