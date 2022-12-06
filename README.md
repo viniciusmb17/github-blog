@@ -1,7 +1,7 @@
 # GitHub Blog (demo)
 
 ## In progress
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/25)  
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/40)  
 
 ## Demo
 
