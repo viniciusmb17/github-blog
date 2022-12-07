@@ -1,14 +1,13 @@
 import { PostContentContainer, customDracula } from './style'
 import ReactMarkdown from 'react-markdown'
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism'
-import { CodeProps } from 'react-markdown/lib/ast-to-react'
 
 export function PostContent({ content }: { content: string }) {
   return (
     <PostContentContainer>
       <ReactMarkdown
         components={{
-          code({ node, inline, className, children, ...props }: CodeProps) {
+          code({ node, inline, className, children, ...props }: any) {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
               <SyntaxHighlighter
