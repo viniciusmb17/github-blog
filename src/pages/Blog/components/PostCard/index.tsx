@@ -1,4 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import ReactMarkdown from 'react-markdown'
 import {
   PostCardContainer,
   PostCardHeader,
@@ -7,26 +10,34 @@ import {
   PostCardText,
 } from './style'
 
-export function PostCard() {
-  const navigate = useNavigate()
+interface PostCardProps {
+  body: string
+  title: string
+  createdAt: Date
+  number: number
+}
 
+export function PostCard({ body, title, createdAt, number }: PostCardProps) {
+  const navigate = useNavigate()
+  const createdDateFormatted = format(createdAt, "d 'de' LLLL 'às' HH:mm'h'", {
+    locale: ptBR,
+  })
+  const createdDateRelativeToNow = formatDistanceToNow(createdAt, {
+    locale: ptBR,
+    addSuffix: true,
+  })
   return (
-    <PostCardContainer onClick={() => navigate('/post')}>
+    <PostCardContainer onClick={() => navigate(`/post/${number}`)}>
       <PostCardHeader>
-        <PostCardTitle>JavaScript data types and data structures</PostCardTitle>
-        <PostCardSpan>Há 1 dia</PostCardSpan>
+        <PostCardTitle>{title}</PostCardTitle>
+        <PostCardSpan>
+          <time title={createdDateFormatted} dateTime={createdAt.toISOString()}>
+            {createdDateRelativeToNow}
+          </time>
+        </PostCardSpan>
       </PostCardHeader>
       <PostCardText>
-        {`Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. These can be used to build other data structures. Wherever
-        possible, comparisons with other languages are drawn. Dynamic typing
-        JavaScript is a loosely typed and dynamic language. Variables in
-        JavaScript are not directly associated with any particular value type,
-        and any variable can be assigned (and re-assigned) values of all types:
-        let foo = 42; // foo is now a number foo = 'bar'; // foo is now a string
-        foo = true; // foo is now a boolean`}
+        <ReactMarkdown>{body}</ReactMarkdown>
       </PostCardText>
     </PostCardContainer>
   )
