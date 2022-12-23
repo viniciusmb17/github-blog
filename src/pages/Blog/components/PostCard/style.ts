@@ -22,6 +22,7 @@ export const PostCardContainer = styled.div`
 export const PostCardHeader = styled.header`
   display: flex;
   align-items: baseline;
+  gap: 0.5rem;
 `
 
 export const PostCardTitle = styled.h1`
@@ -36,11 +37,12 @@ export const PostCardTitle = styled.h1`
 
 export const PostCardSpan = styled.span`
   display: flex;
-  width: 3.3125rem;
-  white-space: nowrap;
+  min-width: 7.5rem;
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 160%;
+  justify-content: end;
+  text-align: center;
 
   color: ${(props) => props.theme['base-span']};
 `
