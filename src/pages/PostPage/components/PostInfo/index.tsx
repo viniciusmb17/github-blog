@@ -1,6 +1,8 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faCalendarDay, faComment } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 import { CustomAnchor } from '../../../../components/CustomAnchor'
 import { CustomLink } from '../../../../components/CustomLink'
 import {
@@ -11,7 +13,21 @@ import {
   PostInfoTitle,
 } from './style'
 
-export function PostInfo() {
+interface PostInfoProps {
+  title: string
+  createdAt: Date
+  comments: number
+}
+
+export function PostInfo({ title, comments, createdAt }: PostInfoProps) {
+  const createdDateFormatted = format(createdAt, "d 'de' LLLL 'às' HH:mm'h'", {
+    locale: ptBR,
+  })
+  const createdDateRelativeToNow = formatDistanceToNow(createdAt, {
+    locale: ptBR,
+    addSuffix: true,
+  })
+
   return (
     <PostInfoContainer>
       <PostInfoHeader>
@@ -22,7 +38,7 @@ export function PostInfo() {
           Ver no GitHub
         </CustomAnchor>
       </PostInfoHeader>
-      <PostInfoTitle>JavaScript data types and data structures</PostInfoTitle>
+      <PostInfoTitle>{title}</PostInfoTitle>
       <PostInfoList>
         <PostInfoItem>
           <FontAwesomeIcon icon={faGithub} />
@@ -30,11 +46,22 @@ export function PostInfo() {
         </PostInfoItem>
         <PostInfoItem>
           <FontAwesomeIcon icon={faCalendarDay} />
-          <span>Há 1 dia</span>
+          <span>
+            <time
+              title={createdDateFormatted}
+              dateTime={createdAt.toISOString()}
+            >
+              {createdDateRelativeToNow}
+            </time>
+          </span>
         </PostInfoItem>
         <PostInfoItem>
           <FontAwesomeIcon icon={faComment} />
-          <span>5 comentários</span>
+          {comments === 1 ? (
+            <span>1 comentário</span>
+          ) : (
+            <span>{comments} comentários</span>
+          )}
         </PostInfoItem>
       </PostInfoList>
     </PostInfoContainer>

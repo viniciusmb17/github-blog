@@ -1,24 +1,29 @@
 /* eslint-disable no-irregular-whitespace */
+import { Navigate, useParams } from 'react-router-dom'
+import { usePostContext } from '../../hooks/usePostContext'
 import { PostContent } from './components/PostContent'
 import { PostInfo } from './components/PostInfo'
 import { PostPageContainer } from './style'
 
 export function PostPage() {
-  const content = `**Programming languages all have built-in data structures, but these often differ from one language to another.** This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.
+  const { number } = useParams()
+  const { issues } = usePostContext()
+  const currentIssue = issues
+    ? issues.find((issue) => issue?.number === Number(number))
+    : null
 
-  [Dynamic typing](#)  
-  JavaScript is a loosely typed and dynamic language. Variables in JavaScript are not directly associated with any particular value type, and any variable can be assigned (and re-assigned) values of all types:
-  
-  ~~~javascript
-  let foo = 42;   // foo is now a number
-  foo = 'bar';   // foo is now a string
-  foo = true;    // foo is now a boolean
-  ~~~`
+  if (!currentIssue) {
+    return <Navigate to={'/'} />
+  }
 
   return (
     <PostPageContainer>
-      <PostInfo />
-      <PostContent content={content} />
+      <PostInfo
+        title={currentIssue.title}
+        createdAt={new Date(currentIssue.created_at)}
+        comments={currentIssue.comments}
+      />
+      <PostContent content={currentIssue.body} />
     </PostPageContainer>
   )
 }

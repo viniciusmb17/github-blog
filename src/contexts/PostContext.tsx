@@ -33,7 +33,7 @@ export interface Reactions {
   eyes: number
 }
 
-export interface IssuesType {
+export interface IssueType {
   url: string
   repository_url: string
   labels_url: string
@@ -65,19 +65,19 @@ export interface IssuesType {
 }
 
 interface PostContextProps {
-  issues: IssuesType[] | null
+  issues: IssueType[] | null
   isLoading: boolean
 }
 export const PostContext = createContext({} as PostContextProps)
 
 export function PostProvider({ children }: { children: ReactNode }) {
-  const [issues, setIssues] = useState<IssuesType[] | null>(null)
+  const [issues, setIssues] = useState<IssueType[] | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   async function fetchIssues() {
     setIsLoading(true)
     try {
-      const { data }: { data: IssuesType[] } = await api.get(
+      const { data }: { data: IssueType[] } = await api.get(
         'repos/viniciusmb17/github-blog/issues',
       )
       setIssues(data)
