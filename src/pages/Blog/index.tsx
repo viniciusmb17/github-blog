@@ -9,9 +9,16 @@ import {
   BlogPosts,
 } from './style'
 import { usePostContext } from '../../hooks/usePostContext'
+import { useForm, SubmitHandler } from 'react-hook-form'
+
+interface BlogSearchType {
+  search: string
+}
 
 export function Blog() {
   const { isLoading, issues } = usePostContext()
+  const { register, handleSubmit } = useForm<BlogSearchType>()
+  const onSubmit: SubmitHandler<BlogSearchType> = (data) => console.log(data)
 
   if (isLoading) {
     return <p>Carregando...</p>
@@ -29,7 +36,13 @@ export function Blog() {
             <span>{issues?.length} publicações</span>
           )}
         </BlogHeader>
-        <BlogSearchInput type="text" placeholder="Buscar conteúdo" />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <BlogSearchInput
+            type="text"
+            placeholder="Buscar conteúdo"
+            {...register('search')}
+          />
+        </form>
         <BlogPosts>
           {issues?.map((issue) => (
             <PostCard

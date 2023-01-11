@@ -10,6 +10,10 @@ export const BlogSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 54rem;
+
+  form {
+    display: flex;
+  }
 `
 
 export const BlogHeader = styled.header`
@@ -33,6 +37,7 @@ export const BlogSubtitle = styled.h2`
 
 export const BlogSearchInput = styled.input`
   display: flex;
+  width: 100%;
   align-items: center;
   padding: 0.75rem 1rem;
   margin-top: 1.5rem;
