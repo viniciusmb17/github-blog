@@ -1,5 +1,5 @@
-import { ReactNode, createContext, useState, useEffect } from 'react'
-import { api } from '../lib/axios'
+import { ReactNode, useState, Dispatch, SetStateAction } from 'react'
+import { createContext } from 'use-context-selector'
 
 export interface User {
   login: string
@@ -64,36 +64,28 @@ export interface IssueType {
   state_reason?: any
 }
 
+export interface SearchIssuesProps {
+  q: string
+  username: string
+  repo: string
+}
+
 interface PostContextProps {
   issues: IssueType[] | null
   isLoading: boolean
+  setIssues: Dispatch<SetStateAction<IssueType[] | []>>
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 export const PostContext = createContext({} as PostContextProps)
 
 export function PostProvider({ children }: { children: ReactNode }) {
-  const [issues, setIssues] = useState<IssueType[] | null>(null)
+  const [issues, setIssues] = useState<IssueType[] | []>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  async function fetchIssues() {
-    setIsLoading(true)
-    try {
-      const { data }: { data: IssueType[] } = await api.get(
-        'repos/viniciusmb17/github-blog/issues',
-      )
-      setIssues(data)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchIssues()
-  }, [])
-
   return (
-    <PostContext.Provider value={{ issues, isLoading }}>
+    <PostContext.Provider
+      value={{ issues, isLoading, setIssues, setIsLoading }}
+    >
       {children}
     </PostContext.Provider>
   )

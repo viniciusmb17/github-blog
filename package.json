@@ -23,7 +23,8 @@
     "react-hook-form": "^7.41.5",
     "react-markdown": "^8.0.4",
     "react-router-dom": "^6.4.3",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "use-context-selector": "^1.4.1"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.1.3",
