@@ -1,90 +1,59 @@
-import { ReactNode, useState, Dispatch, SetStateAction } from 'react'
+import { ReactNode, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { createContext } from 'use-context-selector'
-
-export interface User {
-  login: string
-  id: number
-  node_id: string
-  avatar_url: string
-  gravatar_id: string
-  url: string
-  html_url: string
-  followers_url: string
-  following_url: string
-  gists_url: string
-  starred_url: string
-  subscriptions_url: string
-  organizations_url: string
-  repos_url: string
-  events_url: string
-  received_events_url: string
-  type: string
-  site_admin: boolean
-}
-
-export interface Reactions {
-  url: string
-  total_count: number
-  laugh: number
-  hooray: number
-  confused: number
-  heart: number
-  rocket: number
-  eyes: number
-}
+import { useAxios } from '../hooks/useAxios'
 
 export interface IssueType {
-  url: string
-  repository_url: string
-  labels_url: string
-  comments_url: string
-  events_url: string
-  html_url: string
-  id: number
-  node_id: string
-  number: number
-  title: string
-  user: User
-  labels: any[]
-  state: string
-  locked: boolean
-  assignee?: any
-  assignees: any[]
-  milestone?: any
-  comments: number
-  created_at: Date
-  updated_at: Date
-  closed_at?: any
-  author_association: string
-  active_lock_reason?: any
+  id: string
   body: string
-  reactions: Reactions
-  timeline_url: string
-  performed_via_github_app?: any
-  state_reason?: any
-}
-
-export interface SearchIssuesProps {
-  q: string
-  username: string
-  repo: string
+  title: string
+  created_at: Date
+  number: number
 }
 
 interface PostContextProps {
   issues: IssueType[] | null
-  isLoading: boolean
-  setIssues: Dispatch<SetStateAction<IssueType[] | []>>
-  setIsLoading: Dispatch<SetStateAction<boolean>>
+  error: string
+  isFetching: boolean
+  search: string
+  setSearchParams: ({ q }: { q: string }) => void
 }
+
 export const PostContext = createContext({} as PostContextProps)
 
+interface DataProps {
+  items: IssueType[]
+}
+
+const username = 'viniciusmb17'
+const repo = 'github-blog'
+
 export function PostProvider({ children }: { children: ReactNode }) {
-  const [issues, setIssues] = useState<IssueType[] | []>([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const search = useMemo(() => {
+    return searchParams.get('q') || ''
+  }, [searchParams])
+
+  const { data, error, isFetching } = useAxios<DataProps>({
+    method: 'GET',
+    url: 'search/issues',
+    params: {
+      q: `${search}is:issue repo:${username}/${repo}`,
+    },
+  })
+
+  const issues = data?.items || null
 
   return (
     <PostContext.Provider
-      value={{ issues, isLoading, setIssues, setIsLoading }}
+      value={{
+        issues,
+        error,
+        isFetching,
+        search,
+        setSearchParams,
+      }}
     >
       {children}
     </PostContext.Provider>

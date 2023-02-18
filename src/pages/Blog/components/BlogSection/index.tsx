@@ -6,57 +6,33 @@ import {
   BlogSectionContainer,
   BlogSubtitle,
 } from './style'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { useSearchParams } from 'react-router-dom'
+import { ChangeEvent } from 'react'
 import { useContextSelector } from 'use-context-selector'
 import { PostContext } from '../../../../contexts/PostContext'
-import { useDebounce } from '../../../../hooks/useDebounce'
-import { useEffect, useMemo } from 'react'
-import { useSearchIssues } from '../../../../hooks/useSearchIssues'
-
-interface BlogSearchType {
-  search: string
-}
 
 export function BlogSection() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const isLoading = useContextSelector(
+  const search = useContextSelector(PostContext, (context) => context.search)
+  const setSearchParams = useContextSelector(
     PostContext,
-    (context) => context.isLoading,
+    (context) => context.setSearchParams,
   )
+
   const issues = useContextSelector(PostContext, (context) => context.issues)
-  const { debounce } = useDebounce(600, true)
-  const { register, watch, handleSubmit } = useForm<BlogSearchType>()
-  const watchSearch = watch('search')
+  const isFetchingPosts = useContextSelector(
+    PostContext,
+    (context) => context.isFetching,
+  )
+  const error = useContextSelector(PostContext, (context) => context.error)
 
-  const search = useMemo(() => {
-    return searchParams.get('q') || ''
-  }, [searchParams])
+  if (error) {
+    console.log(error)
+  }
 
-  const searchIssues = useSearchIssues({
-    username: 'viniciusmb17',
-    repo: 'github-blog',
-    q: search,
-  })
+  function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
+    setSearchParams({ q: event.target.value })
+  }
 
-  const onSubmit: SubmitHandler<BlogSearchType> = (data) => console.log(data)
-
-  useEffect(() => {
-    debounce(() => {
-      setSearchParams({ q: watchSearch }, { replace: true })
-      handleSubmit(onSubmit)
-      searchIssues()
-    })
-  }, [
-    debounce,
-    handleSubmit,
-    searchIssues,
-    setSearchParams,
-    watch,
-    watchSearch,
-  ])
-
-  if (isLoading) {
+  if (isFetchingPosts) {
     return <p>Carregando...</p>
   }
 
@@ -70,11 +46,13 @@ export function BlogSection() {
           <span>{issues?.length} publicações</span>
         )}
       </BlogHeader>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
         <BlogSearchInput
           type="text"
           placeholder="Buscar conteúdo"
-          {...register('search')}
+          name="search"
+          value={search}
+          onChange={handleSearchChange}
         />
       </form>
       <BlogPosts>
