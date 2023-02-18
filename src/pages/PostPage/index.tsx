@@ -23,6 +23,7 @@ export function PostPage() {
         title={currentIssue.title}
         createdAt={new Date(currentIssue.created_at)}
         comments={currentIssue.comments}
+        htmlUrl={currentIssue.html_url}
       />
       <PostContent content={currentIssue.body} />
     </PostPageContainer>

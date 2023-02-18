@@ -21,8 +21,9 @@ interface UserContextProps {
 
 export const UserContext = createContext({} as UserContextProps)
 
+export const username = 'viniciusmb17'
+
 export function UserProvider({ children }: { children: ReactNode }) {
-  const username = 'viniciusmb17'
   const {
     data: user,
     error,

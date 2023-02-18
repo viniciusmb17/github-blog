@@ -2,11 +2,13 @@ import { ReactNode, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { createContext } from 'use-context-selector'
 import { useAxios } from '../hooks/useAxios'
+import { username } from './UserContext'
 
 export interface IssueType {
   id: string
   body: string
   title: string
+  html_url: string
   created_at: Date
   number: number
   comments: number
@@ -20,14 +22,13 @@ interface PostContextProps {
   setSearchParams: ({ q }: { q: string }) => void
 }
 
+const repo = 'github-blog'
+
 export const PostContext = createContext({} as PostContextProps)
 
 interface DataProps {
   items: IssueType[]
 }
-
-const username = 'viniciusmb17'
-const repo = 'github-blog'
 
 export function PostProvider({ children }: { children: ReactNode }) {
   const [searchParams, setSearchParams] = useSearchParams()
