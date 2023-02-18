@@ -1,6 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { api } from '../lib/axios'
+import { useDebounce } from './useDebounce'
 
 interface ConfigProps {
   url: string
@@ -25,23 +26,27 @@ export function useAxios<T = unknown>({
   const [isFetching, setIsFetching] = useState(true)
   const [error, setError] = useState('')
 
+  const { debounce } = useDebounce(500)
+
   const q = useMemo(() => params?.q || '', [params?.q])
 
   const sendRequest = useCallback(() => {
     const configApi = q ? { url, method, params: { q } } : { url, method }
 
-    api(configApi)
-      .then((response) => {
-        setError('')
-        setData(response.data)
-      })
-      .catch((error) => {
-        setError(error.message)
-      })
-      .finally(() => {
-        setIsFetching(false)
-      })
-  }, [method, q, url])
+    debounce(() =>
+      api(configApi)
+        .then((response) => {
+          setError('')
+          setData(response.data)
+        })
+        .catch((error) => {
+          setError(error.message)
+        })
+        .finally(() => {
+          setIsFetching(false)
+        }),
+    )
+  }, [debounce, method, q, url])
 
   useEffect(() => {
     sendRequest()
