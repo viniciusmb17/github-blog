@@ -9,6 +9,7 @@ export interface IssueType {
   title: string
   created_at: Date
   number: number
+  comments: number
 }
 
 interface PostContextProps {
